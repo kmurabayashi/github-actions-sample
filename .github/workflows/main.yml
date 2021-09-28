@@ -2,7 +2,7 @@ name: create new branch
 
 on:
   schedule:
-    - cron: '0 0 * * 7'  # At 09:00 on Sunday(JST).
+    - cron:  '30 5,17 * * *'
 
 jobs:
   build:
