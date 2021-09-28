@@ -25,7 +25,7 @@ jobs:
           git checkout -b "$BRANCH_NAME"
           git push origin "$BRANCH_NAME"
           git checkout -b "staging/$BRANCH_NAME"
-          git push -b "staging/$BRANCH_NAME"
+          git push origin "staging/$BRANCH_NAME"
           echo ::set-output name=branch_name::$BRANCH_NAME
 
       - name: Create Pull Request
