@@ -14,7 +14,10 @@ jobs:
 
       - name: Create new Branch
         env:
+          TZ: 'Asia/Tokyo'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git checkout -b release
-          git push origin release
+          DATE=`date +"%Y%m%d"`
+          BRANCH_NAME="release_$DATE"
+          git checkout -b "$BRANCH_NAME"
+          git push origin "$BRANCH_NAME"
