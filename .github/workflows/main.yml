@@ -6,8 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: install hub
-        uses: geertvdc/setup-hub@v1.0.0
 
       - name: checkout dev
         uses: actions/checkout@v2
