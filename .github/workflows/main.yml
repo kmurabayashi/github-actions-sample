@@ -1,8 +1,6 @@
 name: create new branch
 
-on:
-  schedule:
-    - cron:  '30 5,17 * * *'
+on: workflow_dispatch
 
 jobs:
   build:
