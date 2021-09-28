@@ -1,6 +1,8 @@
 name: create new branch
 
 on: workflow_dispatch
+  schedule:
+      - cron:  '30 0 * * * 3'
 
 jobs:
   build:
@@ -22,6 +24,8 @@ jobs:
           BRANCH_NAME="release_$DATE"
           git checkout -b "$BRANCH_NAME"
           git push origin "$BRANCH_NAME"
+          git checkout -b "staging/$BRANCH_NAME"
+          git push -b "staging/$BRANCH_NAME"
           echo ::set-output name=branch_name::$BRANCH_NAME
 
       - name: Create Pull Request
