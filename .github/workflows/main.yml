@@ -29,4 +29,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ steps.create_branch.outputs.branch_name }}
         run: |
-          hub pull-request -m "Github Actions からプルリクを出す" -b main -h $BRANCH_NAME -l "PR:draft"
+          hub pull-request -m "${{ steps.create_branch.outputs.branch_name }}" -b main -h $BRANCH_NAME
