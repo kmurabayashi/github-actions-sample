@@ -10,7 +10,7 @@ jobs:
       - name: checkout dev
         uses: actions/checkout@v2
         with:
-          ref: dev
+          ref: main
 
       - name: Create new Branch
         env:
