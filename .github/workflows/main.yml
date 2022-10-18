@@ -17,4 +17,4 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_USERNAME: '本番リリース通知'
           SLACK_ICON: 'https://user-images.githubusercontent.com/25860930/178177446-1494100d-a954-447f-af83-f769b4d709e1.png'
-          SLACK_MESSAGE: 「${{ github.event.pull_request.title }}」を本番リリースしました！
+          SLACK_MESSAGE: 「 <@${{ secrets.user_slack_id }}>」を本番リリースしました！
