@@ -1,36 +1,20 @@
-name: create new branch
-
+name: merge-notification
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '30 0 * * 3'
+  pull_request:
+    branches:
+      - master
+    types: [open]
 
 jobs:
-  build:
+  slackNotification:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout dev
-        uses: actions/checkout@v2
-        with:
-          ref: develop
-
-      - name: Create Branch
-        id: create_branch
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
         env:
-          TZ: 'Asia/Tokyo'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          DATE=`date +"%Y%m%d"`
-          BRANCH_NAME="release_$DATE"
-          git checkout -b "$BRANCH_NAME"
-          git push origin "$BRANCH_NAME"
-          git checkout -b "staging/$BRANCH_NAME"
-          git push origin "staging/$BRANCH_NAME"
-          echo ::set-output name=branch_name::$BRANCH_NAME
-
-      - name: Create Pull Request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: ${{ steps.create_branch.outputs.branch_name }}
-        run: |
-          hub pull-request -m "${{ steps.create_branch.outputs.branch_name }}" -b main -h $BRANCH_NAME
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: '本番リリース通知'
+          SLACK_ICON: 'https://user-images.githubusercontent.com/25860930/178177446-1494100d-a954-447f-af83-f769b4d709e1.png'
+          SLACK_MESSAGE: 「${{ github.event.pull_request.title }}」を本番リリースしました！
